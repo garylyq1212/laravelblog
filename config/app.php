@@ -228,4 +228,7 @@ return [
 
     ],
 
+    // Heroku Error Logs
+    'logs' => 'errorlog'
+
 ];
