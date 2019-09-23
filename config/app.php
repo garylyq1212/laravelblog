@@ -228,4 +228,7 @@ return [
 
     ],
 
+    // Use Heroku errorlog
+    'log' => 'errorlog'
+
 ];
