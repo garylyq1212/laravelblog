@@ -5,10 +5,15 @@
   <h1>{{ $post->title }}</h1>
   <small>Written by <strong>{{ $post->user->name }}</strong> on {{ $post->created_at }}</small>
   <hr>
-  @if ($post->image)
-    <img src="/storage/posts_images/{{ $post->image }}" alt="post image" width="300px" height="300px">  
-  @endif
   <p>{{ $post->body }}</p>
+  @if ($post->image)
+    <img       
+      src="{{ Storage::disk('s3')->url($post->image) }}" 
+      alt="post image" 
+      width="300px" 
+      height="300px"
+    >  
+  @endif
   <br>
   <br>
 

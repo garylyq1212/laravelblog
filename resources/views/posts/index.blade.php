@@ -19,7 +19,7 @@
       <div class="row">
         @if ($post->image)
           <div class="col-6 col-md-4">
-            <img src="/storage/posts_images/{{ $post->image }}" alt="post image" width="300px" height="300px">
+            <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="post image" width="300px" height="300px">
           </div>
         @endif
         <div class="col-12 col-md-8">

@@ -67,7 +67,9 @@ class PostsController extends Controller
 
       $filenameToStore = $getFilename . '-' . date('Y-m-j H_i_s') . '.' . $getFileExtension;
 
-      $path = $request->file('image')->storeAs('public/posts_images', $filenameToStore);
+      $path = $request->file('image')->storeAs('posts_images/', $filenameToStore, 's3');
+      // $path = $request->file('image')->store('posts_images/', 's3');
+      // $path = Storage::disk('s3')->putFileAs('posts_images', $request->file('image'), $filenameToStore);
     } else {
       $filenameToStore = null;
     }
@@ -143,7 +145,7 @@ class PostsController extends Controller
 
       $filenameToStore = $getFilename . '-' . date('Y-m-j H_i_s') . '.' . $getFileExtension;
 
-      $path = $request->file('image')->storeAs('public/posts_images', $filenameToStore);
+      $path = $request->file('image')->storeAs('posts_images/', $filenameToStore, 's3');
     }
 
     $post->title = $request->input('title');
@@ -151,7 +153,8 @@ class PostsController extends Controller
 
     if ($request->hasFile('image')) {
       // Delete image
-      Storage::delete('public/posts_images/' . $post->image);
+      // Storage::delete('public/posts_images/' . $post->image);
+      Storage::disk('s3')->delete('posts_images/' . $post->image);
 
       $post->image = $filenameToStore;
     }
@@ -172,7 +175,8 @@ class PostsController extends Controller
     $post = Post::findOrFail($id);
 
     // Delete image
-    Storage::delete('public/posts_images/' . $post->image);
+    // Storage::delete('public/posts_images/' . $post->image);
+    Storage::disk('s3')->delete('posts_images/' . $post->image);
 
     $post->delete();
 

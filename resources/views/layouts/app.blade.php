@@ -9,15 +9,15 @@
 
   <title>{{ config('app.name', 'Laravel') }}</title>
 
-  <!-- Scripts -->
-  <script src="{{ secure_asset('js/app.js') }}" defer></script>
+  <!-- Scripts -->  
+  <script src="@if (env('APP_ENV') === 'production') {{ secure_asset('js/app.js') }} @else {{ asset('js/app.js') }} @endif"></script>
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
   <!-- Styles -->
-  <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+  <link href="@if (env('APP_ENV') === 'production') {{ secure_asset('css/app.css') }} @else {{ asset('css/app.css') }} @endif" rel="stylesheet">
 </head>
 <body>
   <div id="app">
